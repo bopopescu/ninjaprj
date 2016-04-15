@@ -1,0 +1,4 @@
+Note:
+1.lib/lws_config.h  lib/lws_config_private.h are copy from cmake generated project.
+2.zlib/openssl are disabled to avoid cmake cross compile error.
+

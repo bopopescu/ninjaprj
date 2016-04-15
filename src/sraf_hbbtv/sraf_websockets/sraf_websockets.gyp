@@ -112,7 +112,7 @@
       'type': 'executable',
       'cflags!': [
           '-Wno-format',
-      '-O0',
+      '-O2',
       '-fvisibility=hidden',
       ],
       'cflags_cc': [

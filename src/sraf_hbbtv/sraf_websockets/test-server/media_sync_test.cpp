@@ -14,9 +14,13 @@ using namespace std;
 class TestClientObserver: public ClientObserver {
     public:
         virtual void onNewClient(char* requrl,int clientid){
+            char msg[]="srvmsg:TestClientObserver::onNewClient";
+            sendMessage(msg,sizeof(msg),-1);
             printf("TestClientObserver::onNewClient url=%s,id=%d\n",requrl,clientid);
         }
         virtual void onMessage(unsigned char*msg,int len,int clientid){
+            char msgx[]="srvmsg:TestClientObserver::onMessage";
+            sendMessage(msgx,sizeof(msgx),-1);
             printf("TestClientObserver::onMessage msg=%s,from=%d\n",msg,clientid);
         }
         virtual void onClientLeave(int clientid){

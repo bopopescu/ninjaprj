@@ -35,7 +35,7 @@ callback_echo(struct lws *wsi, enum lws_callback_reasons reason, void *user,
     _client->setWsi(wsi);
     _client->setSessionData(pss);
     if(reason != 31){
-    //lwsl_notice("callback_echo reason=%2d wsi=%p pss=%p\n",reason,wsi,pss);
+    lwsl_notice("callback_echo reason=%2d wsi=%p pss=%p\n",reason,wsi,pss);
     }
 	switch (reason) {
 
@@ -117,12 +117,13 @@ callback_echo(struct lws *wsi, enum lws_callback_reasons reason, void *user,
 			  len, pss->final, (int)pss->len);
 
 		memcpy(&pss->buf[LWS_PRE], in, len);
-		pss->len = 0;//(unsigned int)len;
+		//assert((int)pss->len == -1);
+		pss->len = (unsigned int)len;
 		pss->rx += len;
         _client->onMessage(&pss->buf[LWS_PRE],len);
 
-		lws_rx_flow_control(wsi, 0);
-		lws_callback_on_writable(wsi);
+		//lws_rx_flow_control(wsi, 0);
+		//lws_callback_on_writable(wsi);
 		break;
 
 	case LWS_CALLBACK_CLOSED:

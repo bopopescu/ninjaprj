@@ -4,7 +4,7 @@
 
 """Runs perf tests.
 
-Our buildbot infrastructure requires each slave to run steps serially.
+Our buildbot infrastructure requires each subordinate to run steps serially.
 This is sub-optimal for android, where these steps can run independently on
 multiple connected devices.
 
@@ -69,12 +69,12 @@ from pylib.base import base_test_result
 from pylib.base import base_test_runner
 
 
-# Regex for the master branch commit position.
-_GIT_CR_POS_RE = re.compile(r'^Cr-Commit-Position: refs/heads/master@{#(\d+)}$')
+# Regex for the main branch commit position.
+_GIT_CR_POS_RE = re.compile(r'^Cr-Commit-Position: refs/heads/main@{#(\d+)}$')
 
 
 def _GetChromiumRevision():
-  """Get the git hash and commit position of the chromium master branch.
+  """Get the git hash and commit position of the chromium main branch.
 
   See: https://chromium.googlesource.com/chromium/tools/build/+/master/scripts/slave/runtest.py#212
 
@@ -397,7 +397,7 @@ class TestRunner(base_test_runner.BaseTestRunner):
     else:
       result_type = base_test_result.ResultType.FAIL
       # Since perf tests use device affinity, give the device a chance to
-      # recover if it is offline after a failure. Otherwise, the master sharder
+      # recover if it is offline after a failure. Otherwise, the main sharder
       # will remove it from the pool and future tests on this device will fail.
       try:
         self.device.WaitUntilFullyBooted(timeout=120)
